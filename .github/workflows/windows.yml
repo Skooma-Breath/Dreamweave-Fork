@@ -16,7 +16,7 @@ on:
 env:
   BUILD_TYPE: Release
   GIT_TERMINAL_PROMPT: 0
-  working-directory: C:\Dreamweave
+  working-directory: C:/Dreamweave
 
 jobs:
   Windows:
@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Clone
         shell: bash
-        working-directory: C:\
+        working-directory: C:/
         run: |
           git clone https://github.com/DreamWeave-MP/Dreamweave.git
           cd Dreamweave
