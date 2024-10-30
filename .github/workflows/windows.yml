@@ -1,3 +1,4 @@
+#pants poop
 name: Windows Build & Test
 
 on:
@@ -15,7 +16,7 @@ on:
 env:
   BUILD_TYPE: Release
   GIT_TERMINAL_PROMPT: 0
-  working-directory: C:/Dreamweave  # Updated to new directory
+  working-directory: C:/Dreamweave
 
 jobs:
   Windows:
@@ -25,16 +26,13 @@ jobs:
     runs-on: windows-2022
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: List All Files  # List all files for debugging
+      - name: Clone
+        shell: bash
+        working-directory: C:/
         run: |
-          ls -R
-
-      - name: List CI Directory Contents  # Check CI directory specifically
-        run: |
-          ls -R CI
+          git clone https://github.com/DreamWeave-MP/Dreamweave.git
+          cd Dreamweave
+          git checkout ${{ github.head_ref }}
 
       - name: Prime ccache
         uses: hendrikmuhs/ccache-action@v1.2
@@ -59,12 +57,16 @@ jobs:
             C:/Dreamweave/MSVC2022_64_Ninja/*.ninja
           key: ${{ runner.os }}-deps
 
+       - name: List CI Directory Contents  # Check CI directory specifically
+        run: |
+          ls -R CI
+
       - name: Install Building Dependencies
         if: steps.cache-WinDeps.outputs.cache-hit != 'true'
         shell: bash
         working-directory: ${{ env.working-directory }}
         run: |
-          curl -o CrabNet.7z -L https://github.com/DreamWeave-MP/CrabNet/releases/download/Stable-CI/CrabNet-Windows-Release.7z
+          curl -o CrabNet.7z -L https://github.com/DreamWeave-MP/CrabNet/releases/download/Stable-CI/CrabNet-${{ runner.os }}-${{ matrix.BUILD_TYPE }}.7z
           7z x -y CrabNet.7z -oextern/raknet
           CI/before_script.msvc.sh -C -V -N -k -p Win64 -v 2022
 
@@ -76,12 +78,13 @@ jobs:
           CI/before_script.msvc.sh -C -V -N -k -p Win64 -v 2022 -d -e
 
       - name: Build
-        shell: cmd
+        shell: bash
         working-directory: ${{ env.working-directory }}
         run: |
           cd MSVC2022_64_Ninja
-          call activate_msvc.bat
+          source activate_msvc.sh
           ninja -f build-${{ matrix.BUILD_TYPE }}.ninja
+
 
       - name: Package
         shell: bash
