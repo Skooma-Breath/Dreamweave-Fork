@@ -58,7 +58,7 @@ jobs:
 
       - name: List CI Directory Contents  # Check CI directory specifically
         run: |
-          ls -R
+          ls
 
       - name: Install Building Dependencies
         if: steps.cache-WinDeps.outputs.cache-hit != 'true'
@@ -71,8 +71,8 @@ jobs:
           # Extract the package
           7z x -y CrabNet.7z -oextern/raknet
 
-          # Make sure the script is executable (this is more for clarity in CI/CD environments)
-          chmod +x CI/before_script.msvc.sh
+
+          cd C:\DreamWeave
 
           # Run the before script
           bash CI/before_script.msvc.sh -C -V -N -k -p Win64 -v 2022
