@@ -72,8 +72,6 @@ jobs:
 
         run: |
           ls
-
-        run: |
           CI/before_script.msvc.sh -C -V -N -k -p Win64 -v 2022 -d -e
 
       - name: Build
