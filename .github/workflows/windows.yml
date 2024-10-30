@@ -63,7 +63,7 @@ jobs:
       - name: View Temporary Script
         shell: bash
         run: |
-          cat D:\a\_temp\32bbc863-5f2a-40d5-920b-c99877af7c9e.sh || echo "Script not found"
+          cat D:/a/_temp/32bbc863-5f2a-40d5-920b-c99877af7c9e.sh || echo "Script not found"
 
 
       - name: Install Building Dependencies
