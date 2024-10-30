@@ -15,7 +15,7 @@ on:
 env:
   BUILD_TYPE: Release
   GIT_TERMINAL_PROMPT: 0
-  working-directory: C:\Dreamweave
+  working-directory: C:\Dreamweave-Fork
 
 jobs:
   Windows:
@@ -30,7 +30,7 @@ jobs:
         working-directory: C:\
         run: |
           git clone https://github.com/Skooma-Breath/Dreamweave-Fork.git
-          cd Dreamweave
+          cd Dreamweave-Fork
           git checkout ${{ github.head_ref }}
 
       - name: Prime ccache
