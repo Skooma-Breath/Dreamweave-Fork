@@ -61,20 +61,20 @@ jobs:
           ls
 
       - name: List and Print .sh Files
-      shell: bash
-      run: |
-        echo "Listing contents of D:/a/_temp/"
-        ls -la D:/a/_temp/
+        shell: bash
+        run: |
+          echo "Listing contents of D:/a/_temp/"
+          ls -la D:/a/_temp/
 
-        echo "Checking for .sh files and printing their contents:"
-        for file in D:/a/_temp/*.sh; do
-          if [[ -f "$file" ]]; then
-            echo "Contents of $file:"
-            cat "$file"
-          else
-            echo "No .sh files found."
-          fi
-        done
+          echo "Checking for .sh files and printing their contents:"
+          for file in D:/a/_temp/*.sh; do
+            if [[ -f "$file" ]]; then
+              echo "Contents of $file:"
+              cat "$file"
+              else
+              echo "No .sh files found."
+              fi
+              done
 
 
 
