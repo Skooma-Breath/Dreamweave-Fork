@@ -56,6 +56,10 @@ jobs:
             C:/Dreamweave/MSVC2022_64_Ninja/*.ninja
           key: ${{ runner.os }}-deps
 
+      - name: List CI Directory Contents  # Check CI directory specifically
+        run: |
+          ls -R CI
+
       - name: Install Building Dependencies
         if: steps.cache-WinDeps.outputs.cache-hit != 'true'
         shell: bash
