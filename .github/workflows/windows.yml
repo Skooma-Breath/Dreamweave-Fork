@@ -1,4 +1,3 @@
-#pants poop
 name: Windows Build & Test
 
 on:
@@ -16,7 +15,7 @@ on:
 env:
   BUILD_TYPE: Release
   GIT_TERMINAL_PROMPT: 0
-  working-directory: C:/Dreamweave
+  working-directory: C:\Dreamweave
 
 jobs:
   Windows:
@@ -28,7 +27,7 @@ jobs:
     steps:
       - name: Clone
         shell: bash
-        working-directory: C:/
+        working-directory: C:\
         run: |
           git clone https://github.com/DreamWeave-MP/Dreamweave.git
           cd Dreamweave
@@ -56,10 +55,6 @@ jobs:
             C:/Dreamweave/MSVC2022_64_Ninja/deps/
             C:/Dreamweave/MSVC2022_64_Ninja/*.ninja
           key: ${{ runner.os }}-deps
-# i shit my pants
-       - name: List CI Directory Contents  # Check CI directory specifically
-        run: |
-          ls -R CI
 
       - name: Install Building Dependencies
         if: steps.cache-WinDeps.outputs.cache-hit != 'true'
@@ -74,6 +69,10 @@ jobs:
         if: steps.cache-WinDeps.outputs.cache-hit == 'true'
         shell: bash
         working-directory: ${{ env.working-directory }}
+
+        run: |
+          ls
+
         run: |
           CI/before_script.msvc.sh -C -V -N -k -p Win64 -v 2022 -d -e
 
