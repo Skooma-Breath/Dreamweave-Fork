@@ -58,7 +58,7 @@ jobs:
 
       - name: List CI Directory Contents  # Check CI directory specifically
         run: |
-          ls -R CI
+          ls -R
 
       - name: Install Building Dependencies
         if: steps.cache-WinDeps.outputs.cache-hit != 'true'
