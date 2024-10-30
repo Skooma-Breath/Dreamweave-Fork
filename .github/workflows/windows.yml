@@ -15,7 +15,7 @@ on:
 env:
   BUILD_TYPE: Release
   GIT_TERMINAL_PROMPT: 0
-  working-directory: C:/openmw-dev/TES3MP  # Adjusted to your directory
+  working-directory: C:/openmw-dev/TES3MP/
 
 jobs:
   Windows:
@@ -27,10 +27,10 @@ jobs:
     steps:
       - name: Clone
         shell: bash
-        working-directory: C:\
+        working-directory: C:/openmw-dev
         run: |
           git clone https://github.com/DreamWeave-MP/Dreamweave.git
-          cd Dreamweave
+          cd TES3MP
           git checkout ${{ github.head_ref }}
 
       - name: Prime ccache
@@ -45,15 +45,15 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            C:/openmw-dev/TES3MP/deps/ICU-70_1/
-            C:/openmw-dev/TES3MP/deps/LuaJIT/
-            C:/openmw-dev/TES3MP/deps/LZ4_1.9.2/
-            C:/openmw-dev/TES3MP/deps/openal-soft-1.23.0-bin/
-            C:/openmw-dev/TES3MP/deps/SDL2-2.24.0/
-            C:/openmw-dev/TES3MP/deps/zlib-1.2.11-msvc2017-win64/
-            C:/openmw-dev/TES3MP/extern/raknet
-            C:/openmw-dev/TES3MP/MSVC2022_64_Ninja/deps/
-            C:/openmw-dev/TES3MP/MSVC2022_64_Ninja/*.ninja
+            C:/openmw-dev/deps/ICU-70_1/
+            C:/openmw-dev/deps/LuaJIT/
+            C:/openmw-dev/deps/LZ4_1.9.2/
+            C:/openmw-dev/deps/openal-soft-1.23.0-bin/
+            C:/openmw-dev/deps/SDL2-2.24.0/
+            C:/openmw-dev/deps/zlib-1.2.11-msvc2017-win64/
+            C:/openmw-dev/extern/raknet
+            C:/openmw-dev/MSVC2022_64_Ninja/deps/
+            C:/openmw-dev/MSVC2022_64_Ninja/*.ninja
           key: ${{ runner.os }}-deps
 
       - name: Install Building Dependencies
@@ -79,6 +79,7 @@ jobs:
           cd MSVC2022_64_Ninja
           source activate_msvc.sh
           ninja -f build-${{ matrix.BUILD_TYPE }}.ninja
+
 
       - name: Package
         shell: bash
