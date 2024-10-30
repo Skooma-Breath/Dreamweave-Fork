@@ -75,7 +75,7 @@ jobs:
           cd C:\DreamWeave
 
           # Run the before script
-          bash CI/before_script.msvc.sh -C -V -N -k -p Win64 -v 2022
+          CI/before_script.msvc.sh -C -V -N -k -p Win64 -v 2022
 
 
       - name: Configure
