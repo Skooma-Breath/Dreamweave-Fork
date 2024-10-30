@@ -65,9 +65,18 @@ jobs:
         shell: bash
         working-directory: ${{ env.working-directory }}
         run: |
+          # Download the CrabNet package
           curl -o CrabNet.7z -L https://github.com/DreamWeave-MP/CrabNet/releases/download/Stable-CI/CrabNet-${{ runner.os }}-${{ matrix.BUILD_TYPE }}.7z
+
+          # Extract the package
           7z x -y CrabNet.7z -oextern/raknet
-          CI/before_script.msvc.sh -C -V -N -k -p Win64 -v 2022
+
+          # Make sure the script is executable (this is more for clarity in CI/CD environments)
+          chmod +x CI/before_script.msvc.sh
+
+          # Run the before script
+          bash CI/before_script.msvc.sh -C -V -N -k -p Win64 -v 2022
+
 
       - name: Configure
         if: steps.cache-WinDeps.outputs.cache-hit == 'true'
