@@ -15,7 +15,7 @@ on:
 env:
   BUILD_TYPE: Release
   GIT_TERMINAL_PROMPT: 0
-  working-directory: C:/openmw-dev/TES3MP/
+  working-directory: C:\Dreamweave
 
 jobs:
   Windows:
