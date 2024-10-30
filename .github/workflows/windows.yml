@@ -71,9 +71,9 @@ jobs:
             if [[ -f "$file" ]]; then
               echo "Contents of $file:"
               cat "$file"
-              else
+            else
               echo "No .sh files found."
-              fi
+            fi
               done
 
 
